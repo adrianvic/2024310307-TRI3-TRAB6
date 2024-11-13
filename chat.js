@@ -41,18 +41,18 @@ ws.addEventListener('open', () => {
         nickbox.textContent = `${nick} @ ${wsAddr}`
         ws.send(`/nick ${params.get('nick')}`)
     } else {
-        nickbox.textContent = "Please chose a nickname"
+        nickbox.textContent = `default @ ${wsAddr}`
     }
 })
 
 ws.addEventListener('close', () =>{
     console.log("Desconectado")
-    showMessage(false, "Desconectado do servidor", "Client")
+    showMessage(false, "Desconectado do servidor", "Client", timestamp)
 })
 
 ws.addEventListener('message', (event) => {
     const data = JSON.parse(event.data)
-    showMessage(false, data.message, data.nick)
+    showMessage(false, data.message, data.nick, data.timestamp)
 })
 
 sendButton.addEventListener('click', () => {
