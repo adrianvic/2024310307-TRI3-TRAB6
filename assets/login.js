@@ -10,7 +10,8 @@ function connect(address, nick) {
     if(address) {
         const href = window.location.href;
         const dir = href.substring(0, href.lastIndexOf('/')) + "/";
-        window.location.href = `${dir}chat.html?server=${encodeURI(address)}${nick ? `&nick=${nick}` : ""}`
+        // console.log(`redirecting to ${dir}chat.html?server=${encodeURI(address)}${nick ? `&nick=${nick}` : ""}`)
+        window.location.href = `${dir}client.html?server=${encodeURI(address)}${nick ? `&nick=${nick}` : ""}`
     } else {
         alert("No server address provided")
     }
