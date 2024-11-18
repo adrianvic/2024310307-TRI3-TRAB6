@@ -68,11 +68,11 @@ sendButton.addEventListener('click', () => {
 
 function sendMessage() {
     if(composeBox.value !== '') {
-    if(composeBox.value.startsWith('/nick')) {
-        nick = composeBox.value.split(' ')[1]
-        nickbox.textContent = `${nick} @ ${wsAddr}`;
+        if(composeBox.value.startsWith('/nick')) {
+            nick = composeBox.value.split(' ')[1]
+            nickbox.textContent = `${nick} @ ${wsAddr}`;
+        }
+        ws.send(composeBox.value)
+        composeBox.value = '';
     }
-    }
-    ws.send(composeBox.value)
-    composeBox.value = '';
 }
