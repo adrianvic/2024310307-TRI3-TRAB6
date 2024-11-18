@@ -10,6 +10,13 @@ const nickbox = document.querySelector('#username')
 let incomingNicknames = document.querySelectorAll('.incomingNickname')
 const composeBox = document.querySelector('#composeBox')
 
+composeBox.addEventListener('keypress', function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+    }
+})
+
 function showMessage(owner, message, nickname, timestamp) { 
     const isOwner = nick == nickname
     let html = `<div class="message ${isOwner ? "owner" : ""}">
@@ -56,10 +63,14 @@ ws.addEventListener('message', (event) => {
 })
 
 sendButton.addEventListener('click', () => {
+    sendMessage()
+})
+
+function sendMessage() {
     if(composeBox.value.startsWith('/nick')) {
         nick = composeBox.value.split(' ')[1]
         nickbox.textContent = `${nick} @ ${wsAddr}`;
     }
     ws.send(composeBox.value)
-    console.log(composeBox.value)
-})
+    composeBox.value = '';
+}
